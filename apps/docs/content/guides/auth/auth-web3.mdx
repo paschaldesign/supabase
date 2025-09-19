@@ -20,18 +20,18 @@ Authentication works by asking the Web3 wallet application to sign a predefined 
 An example of such a message is:
 
 ```
-example.com wants you to sign in with your Ethereum account:
+opensourcetoken.com wants you to sign in with your Ethereum account:
 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2
 
-I accept the ExampleOrg Terms of Service: https://example.com/tos
+I accept the ExampleOrg Terms of Service: https://opensourcetoken.com/tos
 
-URI: https://example.com/login
+URI: https://opensourcetoken.com/login
 Version: 1
 Chain ID: 1
 Nonce: 32891756
 Issued At: 2021-09-30T16:25:24Z
 Resources:
-- https://example.com/my-web2-claim.json
+- https://opensourcetoken.com/my-web2-claim.json
 ```
 
 It defines the wallet address, timestamp, browser location where the sign-in occurred and includes a customizable statement (`I accept...`) which you can use to ask consent from the user.
@@ -85,10 +85,10 @@ secret = "0x0000000000000000000000000000000000000000"
 
 Many wallet applications will warn the user if the message sent for signing is not coming from the page they are currently visiting. To further prevent your Supabase project from receiving signed messages destined for other applications, you must register your application's URL using the [Redirect URL settings](/docs/guides/auth/redirect-urls).
 
-For example if the user is signing in to the page `https://example.com/sign-in` you should add the following configurations in the Redirect URL settings:
+For example if the user is signing in to the page `https://opensourcetoken.com/sign-in` you should add the following configurations in the Redirect URL settings:
 
-- `https://example.com/sign-in/` (last slash is important)
-- Alternatively set up a glob pattern such as `https://example.com/**`
+- `https://opensourcetoken.com/sign-in/` (last slash is important)
+- Alternatively set up a glob pattern such as `https://opensourcetoken.com/**`
 
 ## Sign in with Ethereum
 
@@ -114,7 +114,7 @@ Use the following code to sign in a user, implicitly relying on the `window.ethe
 ```typescript
 const { data, error } = await supabase.auth.signInWithWeb3({
   chain: 'ethereum',
-  statement: 'I accept the Terms of Service at https://example.com/tos',
+  statement: 'I accept the Terms of Service at https://opensourcetoken.com/tos',
 })
 ```
 
@@ -127,7 +127,7 @@ Once you've obtained a wallet using the wallet detection (EIP-6963) mechanism, y
 ```typescript
 const { data, error } = await supabase.auth.signInWithWeb3({
   chain: 'ethereum',
-  statement: 'I accept the Terms of Service at https://example.com/tos',
+  statement: 'I accept the Terms of Service at https://opensourcetoken.com/tos',
   wallet: selectedWallet, // obtain this using the EIP-6963 mechanism
 })
 ```
@@ -178,7 +178,7 @@ Use the following code to authenticate a user:
 ```typescript
 const { data, error } = await supabase.auth.signInWithWeb3({
   chain: 'solana',
-  statement: 'I accept the Terms of Service at https://example.com/tos',
+  statement: 'I accept the Terms of Service at https://opensourcetoken.com/tos',
 })
 ```
 
@@ -190,7 +190,7 @@ If you are using a non-standard Solana wallet that does not register the `window
   ```typescript
   const { data, error } = await supabase.auth.signInWithWeb3({
     chain: 'solana',
-    statement: 'I accept the Terms of Service at https://example.com/tos',
+    statement: 'I accept the Terms of Service at https://opensourcetoken.com/tos',
     wallet: window.braveSolana,
   })
   ```
@@ -198,7 +198,7 @@ If you are using a non-standard Solana wallet that does not register the `window
   ```typescript
   const { data, error } = await supabase.auth.signInWithWeb3({
     chain: 'solana',
-    statement: 'I accept the Terms of Service at https://example.com/tos',
+    statement: 'I accept the Terms of Service at https://opensourcetoken.com/tos',
     wallet: window.phantom,
   })
   ```
@@ -224,7 +224,7 @@ function SignInButton() {
           onClick={() => {
             supabase.auth.signInWithWeb3({
               chain: 'solana',
-              statement: 'I accept the Terms of Service at https://example.com/tos',
+              statement: 'I accept the Terms of Service at https://opensourcetoken.com/tos',
               wallet,
             })
           }}
